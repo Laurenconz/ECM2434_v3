@@ -120,11 +120,10 @@ AUTH_USER_MODEL = 'bingo.User'
 
 # Static URL for serving static files
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'bingo-frontend', 'build'),  # Add this line if the build is here
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files
 MEDIA_URL = '/media/'
