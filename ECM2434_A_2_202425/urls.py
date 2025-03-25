@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('bingo.urls')),
     
-    # Serve the React app
+    # Serve the React app for all non-API, non-admin routes
     path('', TemplateView.as_view(template_name='index.html')),
     re_path(r'^(?!api/|admin/).*$', TemplateView.as_view(template_name='index.html')),
 ]
