@@ -1,30 +1,17 @@
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
-
-# Remove or comment out this function
-# def home(request):
-#     return HttpResponse("Hello, Django is running!")
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  # Django Admin Panel
-    path('api/', include('bingo.urls')),  # Include API routes with 'api/' prefix
+    path('admin/', admin.site.urls),
+    path('api/', include('bingo.urls')),
     
-    # Use the staticfiles index.html as your main template
-    path('', TemplateView.as_view(template_name='index.html')),
-    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
+    # This should come last
+    re_path(r'^(?!api/).*$', TemplateView.as_view(template_name='index.html')),
 ]
 
-
-# Debug Toolbar (Only if settings.DEBUG is True)
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+# Add this section to serve static files during development
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

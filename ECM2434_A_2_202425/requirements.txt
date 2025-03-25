@@ -15,4 +15,4 @@ gunicorn
 djangorestframework
 pillow  # If you're handling images
 django-cors-headers  # If you're using CORSwhitenoise>=6.0.0
-whitenoise>=6.0.0
+whitenoise==6.5.0
