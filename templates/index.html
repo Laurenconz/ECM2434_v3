@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Django App</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sustainability Bingo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2e7d32;
+            text-align: center;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .buttons a {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-    <h1>My Django App is Working!</h1>
-    <p>This is a simple page to confirm that static files are working.</p>
+    <div class="container">
+        <h1>Sustainability Bingo</h1>
+        <p>Welcome to Sustainability Bingo! Our application is currently under maintenance.</p>
+        <p>In the meantime, you can access the following:</p>
+        
+        <div class="buttons">
+            <a href="/api/login/">API Login</a>
+            <a href="/api/register/">API Register</a>
+            <a href="/admin/">Admin Panel</a>
+            <a href="/test/">Test Page</a>
+        </div>
+    </div>
 </body>
 </html>
