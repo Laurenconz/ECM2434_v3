@@ -124,7 +124,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    # Remove any references to bingo-frontend/build/static
+    os.path.join(BASE_DIR, 'bingo-frontend', 'build'),
+    os.path.join(BASE_DIR, 'bingo-frontend', 'build', 'static'),
 ]
 
 # Media files
@@ -165,7 +166,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'staticfiles'),  # Add this line
+            os.path.join(BASE_DIR, 'bingo-frontend', 'build'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
