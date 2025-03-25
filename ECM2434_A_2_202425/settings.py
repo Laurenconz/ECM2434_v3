@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'bingo-frontend', 'build', 'static'),  # Add this if you have a React build
+    # Remove any references to bingo-frontend/build/static
 ]
 
 # Media files

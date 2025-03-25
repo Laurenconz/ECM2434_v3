@@ -7,9 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('bingo.urls')),
-    
-    # This should come last
-    re_path(r'^(?!api/).*$', TemplateView.as_view(template_name='index.html')),
+    path('', TemplateView.as_view(template_name='index.html')),
 ]
 
 # Add this section to serve static files during development
