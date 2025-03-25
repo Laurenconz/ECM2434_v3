@@ -67,12 +67,31 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
-CORS_ALLOW_ALL_ORIGINS = True  # Temporarily allow all origins
-CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-CORS_ALLOW_HEADERS = ["*"]
+CORS_ALLOW_ALL_ORIGINS = True  # For development - restrict this in production
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = ["*"]
 
 
-CORS_ALLOW_ALL_ORIGINS = True
+# Add these settings to help with CORB issues
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
 # 6️⃣ Django REST Framework Config
 REST_FRAMEWORK = {
