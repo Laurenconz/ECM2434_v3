@@ -36,6 +36,7 @@ if DEBUG:
 
 # 4️⃣ Middleware
 MIDDLEWARE = [
+    "ECM2434_A_2_202425.middleware.RequestFixerMiddleware",
     'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware', 
