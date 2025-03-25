@@ -9,6 +9,7 @@ from .views import (
 # URL Patterns
 
 from django.urls import path, re_path
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('register/', register_user, name='register_user'),
