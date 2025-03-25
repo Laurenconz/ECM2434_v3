@@ -117,13 +117,10 @@ AUTH_USER_MODEL = 'bingo.User'
 # 9️⃣ Static & Media Files
 
 # Static URL for serving static files
-STATIC_URL = '/staticfiles/' 
-
-# Directory where Django will collect static files
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'staticfiles')  
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Media files
@@ -162,7 +159,10 @@ SIMPLE_JWT = {
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],  # You can modify this if needed
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'staticfiles'),  # Add this line
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
