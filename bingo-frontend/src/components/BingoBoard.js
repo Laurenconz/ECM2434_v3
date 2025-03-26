@@ -1,7 +1,7 @@
 // Final Bingo Board Component
 
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import axios from 'axios';
+import apiClient from './apiClient';
 import './bingoboard.css';
 import { useNavigate } from 'react-router-dom';
 import NotificationManager from './NotificationManager';
@@ -249,7 +249,7 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
     };
 
     // Fetch all tasks
-    axios.get(`${API_URL}/api/tasks/`)
+    axios.get('/api/tasks/')
       .then(response => {
         console.log('Tasks fetched:', response.data);
         setTasks(response.data);
