@@ -9,95 +9,77 @@
     <link rel="apple-touch-icon" href="/static/sustainability bingo logo.jpeg"/>
     <link rel="manifest" href="/static/manifest.json"/>
     <title>Sustainability Bingo</title>
+    
+    <!-- Fix Functions Before React Loads -->
+    <script>
+        // Define these functions immediately, before any other scripts run
+        console.log('Applying fixes before scripts load...');
+        window.e = function() { return null; };
+        window.n = function() { return null; };
+        window.showNotification = function() {};
+        window.showProgressUpdate = function() {};
+        window.showTaskCompletion = function() {};
+        window.showPatternCompletion = function() {};
+        window.showPopup = function(options) {
+            if (options && options.onConfirm) setTimeout(options.onConfirm, 100);
+        };
+    </script>
+    
+    <!-- Now load the main app script -->
     <script defer="defer" src="/static/js/main.b2233ee6.js"></script>
     <link href="/static/css/main.ebfb8bca.css" rel="stylesheet">
 </head>
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    
+    <!-- Additional fixes after DOM loads -->
     <script>
-        // Fix JavaScript errors on page load
         window.addEventListener('DOMContentLoaded', function() {
-          console.log('Applying error fixes to page...');
-          
-          // Fix TypeError: e is not a function
-          window.e = window.e || function() { return null; };
-          
-          // Fix TypeError: n is not a function
-          window.n = window.n || function() { return null; };
-          
-          // Fix notification functions
-          window.showNotification = window.showNotification || function() {};
-          window.showProgressUpdate = window.showProgressUpdate || function() {};
-          window.showTaskCompletion = window.showTaskCompletion || function() {};
-          window.showPatternCompletion = window.showPatternCompletion || function() {};
-          window.showPopup = window.showPopup || function(options) {
-            if (options && options.onConfirm) setTimeout(options.onConfirm, 100);
-          };
-          
-          // Fix localhost URL references in fetch calls
-          const originalFetch = window.fetch;
-          window.fetch = function(url, options) {
-            if (typeof url === 'string' && url.includes('localhost:8000')) {
-              url = url.replace('localhost:8000', window.location.host);
-              console.log('Fixed URL:', url);
-            }
-            return originalFetch(url, options);
-          };
-          
-          // Fix image loading errors
-          document.addEventListener('error', function(e) {
-            if (e.target.tagName === 'IMG') {
-              console.log('Image load error, using fallback for:', e.target.src);
-              e.target.src = '/static/default.png';
-              e.preventDefault();
-            }
-          }, true);
-          
-          console.log('Fixes applied!');
-        });
-      </script>
-      <script>
-        // Fix JavaScript errors immediately
-        console.log('Applying emergency fixes for bingo board...');
-        
-        // Fix for TypeError: e is not a function
-        window.e = function() { console.log('Fixed function e called'); return null; };
-        
-        // Fix for TypeError: n is not a function
-        window.n = function() { console.log('Fixed function n called'); return null; };
-        
-        // Fix notification functions
-        window.showNotification = window.showNotification || function() {};
-        window.showProgressUpdate = window.showProgressUpdate || function() {};
-        window.showTaskCompletion = window.showTaskCompletion || function() {};
-        window.showPatternCompletion = window.showPatternCompletion || function() {};
-        window.showPopup = window.showPopup || function(options) {
-          if (options && options.onConfirm) setTimeout(options.onConfirm, 100);
-        };
-        
-        // Fix axios immediately after it loads
-        document.addEventListener('DOMContentLoaded', function() {
-          if (window.axios) {
-            const originalGet = window.axios.get;
-            window.axios.get = function(url, config) {
-              if (url.includes('localhost:8000')) {
-                url = url.replace('localhost:8000', '');
-                console.log('Fixed axios URL:', url);
-              }
-              return originalGet(url, config);
+            console.log('Applying additional fixes...');
+            
+            // Fix localhost URL references in fetch calls
+            const originalFetch = window.fetch;
+            window.fetch = function(url, options) {
+                if (typeof url === 'string' && url.includes('localhost:8000')) {
+                    url = url.replace('localhost:8000', '');
+                    console.log('Fixed URL:', url);
+                }
+                return originalFetch(url, options);
             };
             
-            const originalPost = window.axios.post;
-            window.axios.post = function(url, data, config) {
-              if (url.includes('localhost:8000')) {
-                url = url.replace('localhost:8000', '');
-                console.log('Fixed axios POST URL:', url);
-              }
-              return originalPost(url, data, config);
-            };
-          }
+            // Fix axios if it exists
+            if (window.axios) {
+                const originalGet = window.axios.get;
+                window.axios.get = function(url, config) {
+                    if (url.includes('localhost:8000')) {
+                        url = url.replace('localhost:8000', '');
+                        console.log('Fixed axios URL:', url);
+                    }
+                    return originalGet(url, config);
+                };
+                
+                const originalPost = window.axios.post;
+                window.axios.post = function(url, data, config) {
+                    if (url.includes('localhost:8000')) {
+                        url = url.replace('localhost:8000', '');
+                        console.log('Fixed axios POST URL:', url);
+                    }
+                    return originalPost(url, data, config);
+                };
+            }
+            
+            // Fix image loading errors
+            document.addEventListener('error', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    console.log('Image load error, using fallback for:', e.target.src);
+                    e.target.src = '/static/default.png';
+                    e.preventDefault();
+                }
+            }, true);
+            
+            console.log('All fixes applied!');
         });
-      </script>
-      </body>
+    </script>
+</body>
 </html>
