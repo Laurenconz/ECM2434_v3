@@ -1,10 +1,9 @@
+import './fix';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
-
-import './fix';
 // import reportWebVitals from './reportWebVitals';
 // Add these fallbacks for functions that might be missing
 window.showNotification = window.showNotification || function(id, message) {
