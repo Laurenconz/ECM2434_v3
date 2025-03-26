@@ -47,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -56,24 +57,25 @@ if DEBUG:  # Only include Debug Toolbar Middleware when in debug mode
 
 # 5️⃣ CORS Settings (Allow Frontend to Access Backend)
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3002",  
-    "http://127.0.0.1:3002",
-    "http://localhost:3000",  
+    "https://ecm2434-v3-bqha.onrender.com",
+    "https://ecm2434-v3.onrender.com",
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:3002",
+    "http://localhost:3003",
     "http://127.0.0.1:3000",
-    "http://localhost:3001",  
     "http://127.0.0.1:3001",
-    "http://localhost:3003",  
+    "http://127.0.0.1:3002",
     "http://127.0.0.1:3003"
-
 ]
 
+# For development only - disable in production
+CORS_ALLOW_ALL_ORIGINS = DEBUG
 
-CORS_ALLOW_ALL_ORIGINS = True  # For development - restrict this in production
+# Enable credentials if you're using cookies or session authentication
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = ["*"]
 
-
-# Add these settings to help with CORB issues
+# Configure allowed methods and headers
 CORS_ALLOW_METHODS = [
     "DELETE",
     "GET",
