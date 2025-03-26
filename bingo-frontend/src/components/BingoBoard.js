@@ -249,19 +249,19 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
     };
 
     // Fetch all tasks
-    axios.get('/api/tasks/')
+    apiClient.get('/api/tasks/')
       .then(response => {
         console.log('Tasks fetched:', response.data);
         setTasks(response.data);
 
         // After tasks are fetched, get user's task status
-        return axios.get(`${API_URL}/api/check-auth/`, { headers });
+        return apiClient.get(`${API_URL}/api/check-auth/`, { headers });
       })
       .then(authResponse => {
         console.log('Auth check:', authResponse.data);
 
         // Get all user tasks to check status (pending or completed)
-        return axios.get(`${API_URL}/api/profile/`, { headers });
+        return apiClient.get(`${API_URL}/api/profile/`, { headers });
       })
       .then(profileResponse => {
         // Extract user tasks from profile if available
@@ -399,7 +399,7 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
             onConfirm: async () => {
               try {
                 const token = localStorage.getItem('accessToken');
-                const response = await axios.post(
+                const response = await apiClient.post(
                   `${API_URL}/api/complete_task/`,
                   { task_id: task.id },
                   { headers: { Authorization: `Bearer ${token}` } }
@@ -446,7 +446,7 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
         } else {
           // Fallback if popup manager isn't available
           const token = localStorage.getItem('accessToken');
-          const response = await axios.post(
+          const response = await apiClient.post(
             `${API_URL}/api/complete_task/`,
             { task_id: task.id },
             { headers: { Authorization: `Bearer ${token}` } }
@@ -530,7 +530,7 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
       }
 
       // Submit the task with resubmission flag
-      const response = await axios.post(
+      const response = await apiClient.post(
         `${API_URL}/api/complete_task/`,
         {
           task_id: taskId,
@@ -566,7 +566,7 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
         // Fetch fresh data from the server to ensure everything is in sync
         const token = localStorage.getItem('accessToken');
         const headers = { Authorization: `Bearer ${token}` };
-        const profileResponse = await axios.get(`${API_URL}/api/profile/`, { headers });
+        const profileResponse = await apiClient.post(`${API_URL}/api/profile/`, { headers });
 
         if (profileResponse.data && profileResponse.data.user_tasks) {
           setUserTasks(profileResponse.data.user_tasks);
