@@ -1,5 +1,4 @@
- // Main Application Routing
- 
+// App.js - Updated with Error Boundary
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -19,6 +18,7 @@ import GameKeeper from './components/GameKeeper';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Overview from './components/Overview';
 import BingoPatterns from './components/BingoPatterns';
+import ErrorBoundary from './components/ErrorBoundary';
 
 // Import Notification System
 import NotificationManager from './components/NotificationManager';
@@ -46,15 +46,27 @@ const App = () => {
 
         {/* Leaderboard Routes */}
         <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/leaderboard?type=lifetime" element={<Leaderboard />} />
-        <Route path="/leaderboard?type=monthly" element={<Leaderboard />} />
-
+        
         {/* Other Game Features Routes */}
         <Route path="/homeboard" element={<Homeboard />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/bingo" element={<BingoBoard />} />
         <Route path="/upload" element={<Upload />} />
-        <Route path="/gamekeeper" element={<GameKeeper />} />
+        
+        {/* GameKeeper route wrapped in ErrorBoundary */}
+        <Route path="/gamekeeper" element={
+          <ErrorBoundary>
+            <GameKeeper />
+          </ErrorBoundary>
+        } />
+        
+        {/* Alternative GameKeeper route with a different path */}
+        <Route path="/gk" element={
+          <ErrorBoundary>
+            <GameKeeper />
+          </ErrorBoundary>
+        } />
+        
         <Route path="/scan" element={<Scan />} />
         <Route path="/overview" element={<Overview />} />
         <Route path="/patterns" element={<BingoPatterns />} />
