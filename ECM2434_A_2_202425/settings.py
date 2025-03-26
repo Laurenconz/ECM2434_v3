@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'your-fallback-secret-key')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']
+ALLOWED_HOSTS = ['.onrender.com']
 TIME_ZONE = 'Europe/London'
 
 # 3️⃣ Installed Apps
@@ -59,14 +59,6 @@ if DEBUG:  # Only include Debug Toolbar Middleware when in debug mode
 CORS_ALLOWED_ORIGINS = [
     "https://ecm2434-v3-bqha.onrender.com",
     "https://ecm2434-v3.onrender.com",
-    "http://localhost:3000",
-    "http://localhost:3001",
-    "http://localhost:3002",
-    "http://localhost:3003",
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:3001",
-    "http://127.0.0.1:3002",
-    "http://127.0.0.1:3003"
 ]
 
 # For development only - disable in production
@@ -97,14 +89,6 @@ CORS_ALLOW_HEADERS = [
 ]
 
 # 6️⃣ Django REST Framework Config
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication', 
-        'rest_framework.authentication.TokenAuthentication',  # If using token-based auth
-        'rest_framework.authentication.SessionAuthentication',  # If using session-based auth
-          # Use JWT tokens
-    ),
-}
 
 # 7️⃣ Database Setup (Default: SQLite)
 DATABASES = {
