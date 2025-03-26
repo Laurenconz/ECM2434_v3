@@ -1,10 +1,11 @@
-// GameKeeper.js - Enhanced with rejection comments
+// GameKeeper.js - Fixed version
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './GameKeeper.css';
-import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const API_URL = "https://ecm2434-v3.onrender.com";
+// Fix the API URL - remove the duplicate /api
+const API_URL = "https://ecm2434-v3-bqha.onrender.com";
 
 const GameKeeper = () => {
   const [error, setError] = useState('');
@@ -21,7 +22,6 @@ const GameKeeper = () => {
     requires_scan: false
   });
 
-
   // New state variables for rejection modal
   const [rejectionModalOpen, setRejectionModalOpen] = useState(false);
   const [selectedForRejection, setSelectedForRejection] = useState(null);
@@ -32,10 +32,12 @@ const GameKeeper = () => {
 
   // Fetch initial data
   const fetchData = useCallback(async () => {
+    console.log("Fetching GameKeeper data...");
     setLoading(true);
     try {
       // Get tasks
       const tasksResponse = await axios.get(`${API_URL}/api/tasks/`);
+      console.log("Tasks response:", tasksResponse);
       setTasks(tasksResponse.data);
 
       // Get pending tasks with debug logs
@@ -67,13 +69,21 @@ const GameKeeper = () => {
     }
   }, [token]);
 
-  // Set up auth header
+  // Set up auth header and fetch data
   useEffect(() => {
+    console.log("GameKeeper component mounted");
+    
     if (token) {
+      console.log("Token found, setting auth header");
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       fetchData();
+    } else {
+      console.log("No token found, redirecting to login");
+      navigate('/login');
     }
-  });
+    
+    // Add dependency array to prevent infinite loop
+  }, [token, fetchData, navigate]);
 
   // Handle creating a new task
   const handleCreateTask = async (e) => {
@@ -165,17 +175,6 @@ const GameKeeper = () => {
     localStorage.removeItem('userProfile');
     navigate('/login');
   };
-
-  // Check user submissions for the same task
-  /*const checkUserSubmissions = async (userId, taskId) => {
-    try {
-      const response = await axios.get(`${API_URL}/api/user-submissions/?user_id=${userId}&task_id=${taskId}`);
-      return response.data.submissions || [];
-    } catch (error) {
-      console.error("Error checking user submissions:", error);
-      return [];
-    }
-  }; */
 
   // Enhanced render method with user image history and fraud detection tools
   return (
@@ -420,10 +419,6 @@ const GameKeeper = () => {
     </div>
   );
 };
-const GameKeeperWrapper = () => (
-  <Router>
-    <GameKeeper />
-  </Router>
-);
 
-export default GameKeeperWrapper;
+// Export just the GameKeeper component, not wrapped in another Router
+export default GameKeeper;

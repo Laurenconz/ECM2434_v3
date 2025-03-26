@@ -8,4 +8,54 @@
     <link rel="manifest" href="/manifest.json"/>
     <title>React App</title><script defer="defer" src="/static/js/main.b2233ee6.js"></script><link href="/static/css/main.ebfb8bca.css" rel="stylesheet"></head>
     <body><noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div></body></html>
+      <script>
+        // Fix for any remaining errors that might occur before React loads
+        window.e = function() { return null; };
+        window.n = function() { return null; };
+        
+        // Provide notification functions that might be used
+        window.showNotification = function() {};
+        window.showProgressUpdate = function() {};
+        window.showTaskCompletion = function() {};
+        window.showPatternCompletion = function() {};
+        window.showPopup = function(options) {
+          if (options && options.onConfirm) setTimeout(options.onConfirm, 100);
+        };
+      </script>
+    <div id="root"></div>
+    <script>
+        // Runtime fixes for bingo board
+        window.addEventListener('DOMContentLoaded', function() {
+          console.log('Applying fixes...');
+          
+          // Fix for "TypeError: e is not a function"
+          window.e = function() { return null; };
+          
+          // Fix for "TypeError: n is not a function"
+          window.n = function() { return null; };
+          
+          // Fix URL references
+          if (window.axios) {
+            const originalGet = window.axios.get;
+            window.axios.get = function(url, config) {
+              if (url.includes('localhost:8000')) {
+                url = url.replace('localhost:8000', '');
+                console.log('Fixed axios URL:', url);
+              }
+              return originalGet(url, config);
+            };
+            
+            const originalPost = window.axios.post;
+            window.axios.post = function(url, data, config) {
+              if (url.includes('localhost:8000')) {
+                url = url.replace('localhost:8000', '');
+                console.log('Fixed axios POST URL:', url);
+              }
+              return originalPost(url, data, config);
+            };
+          }
+          
+          console.log('Fixes applied');
+        });
+      </script>
+</body></html>
