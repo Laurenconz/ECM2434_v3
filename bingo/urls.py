@@ -12,6 +12,7 @@ from django.urls import path, re_path
 from django.views.generic import TemplateView
 
 urlpatterns = [
+    path('test.html', TemplateView.as_view(template_name='test.html')),
     path('register/', register_user, name='register_user'),
     path('login/', login_user, name='login_user'),
     path('check-auth/', check_auth, name='check_auth'),
