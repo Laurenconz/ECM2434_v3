@@ -46,15 +46,20 @@ def api_proxy(request, path):
     
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    # Add a specific route for developer-front.html BEFORE the catch-all
+    path('developer-front.html', TemplateView.as_view(template_name='developer-front.html')),
+    
+    # API routes
     path('api/', include('bingo.urls')),
     
     # Proxy routes
     path('via.placeholder.com/<str:size>', placeholder_proxy),
     path('localhost:8000/api/<path:path>', api_proxy),
     
-    # React app routes
+    # React app routes - catches everything else
     path('', TemplateView.as_view(template_name='index.html')),
-    re_path(r'^(?!api/|admin/).*$', TemplateView.as_view(template_name='index.html')),
+    re_path(r'^(?!api/|admin/|developer-front\.html).*$', TemplateView.as_view(template_name='index.html')),
 ]
 
 # Add this for development (will be ignored in production with DEBUG=False)

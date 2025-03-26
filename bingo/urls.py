@@ -15,7 +15,7 @@ urlpatterns = [
     path('register/', register_user, name='register_user'),
     path('login/', login_user, name='login_user'),
     path('check-auth/', check_auth, name='check_auth'),
-    path('tasks/', tasks, name='tasks'),
+    path('api/tasks/', tasks, name='tasks'),
     path('pending-tasks/', pending_tasks,name = 'pending-tasks'),
     path('complete_task/', complete_task, name='complete_task'),
     path('approve-task/', approve_task, name='approve_task'),
@@ -30,7 +30,5 @@ urlpatterns = [
     path('reject-task/', reject_task, name='reject_task'),
     path('password-reset/', password_reset_request, name='password_reset_request'),
     path('password-reset/confirm/', password_reset_confirm, name='password_reset_confirm'),
-    path('developer-front.html', TemplateView.as_view(template_name='developer-front.html')),
-re_path(r'^.*$', TemplateView.as_view(template_name='react/index.html')),
 
 ]
