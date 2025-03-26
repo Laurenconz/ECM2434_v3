@@ -30,6 +30,7 @@ urlpatterns = [
     path('reject-task/', reject_task, name='reject_task'),
     path('password-reset/', password_reset_request, name='password_reset_request'),
     path('password-reset/confirm/', password_reset_confirm, name='password_reset_confirm'),
+    path('developer-front.html', TemplateView.as_view(template_name='developer-front.html')),
 re_path(r'^.*$', TemplateView.as_view(template_name='react/index.html')),
 
 ]
