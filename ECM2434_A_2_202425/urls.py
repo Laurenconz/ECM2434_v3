@@ -58,6 +58,7 @@ urlpatterns = [
     path('localhost:8000/api/<path:path>', api_proxy),
     
     # React app routes - catches everything else
+    path('gamekeeper/', TemplateView.as_view(template_name='index.html')),
     path('', TemplateView.as_view(template_name='index.html')),
     re_path(r'^(?!api/|admin/|developer-front\.html).*$', TemplateView.as_view(template_name='index.html')),
 ]
