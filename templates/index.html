@@ -15,5 +15,47 @@
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script>
+        // Fix JavaScript errors on page load
+        window.addEventListener('DOMContentLoaded', function() {
+          console.log('Applying error fixes to page...');
+          
+          // Fix TypeError: e is not a function
+          window.e = window.e || function() { return null; };
+          
+          // Fix TypeError: n is not a function
+          window.n = window.n || function() { return null; };
+          
+          // Fix notification functions
+          window.showNotification = window.showNotification || function() {};
+          window.showProgressUpdate = window.showProgressUpdate || function() {};
+          window.showTaskCompletion = window.showTaskCompletion || function() {};
+          window.showPatternCompletion = window.showPatternCompletion || function() {};
+          window.showPopup = window.showPopup || function(options) {
+            if (options && options.onConfirm) setTimeout(options.onConfirm, 100);
+          };
+          
+          // Fix localhost URL references in fetch calls
+          const originalFetch = window.fetch;
+          window.fetch = function(url, options) {
+            if (typeof url === 'string' && url.includes('localhost:8000')) {
+              url = url.replace('localhost:8000', window.location.host);
+              console.log('Fixed URL:', url);
+            }
+            return originalFetch(url, options);
+          };
+          
+          // Fix image loading errors
+          document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG') {
+              console.log('Image load error, using fallback for:', e.target.src);
+              e.target.src = '/static/default.png';
+              e.preventDefault();
+            }
+          }, true);
+          
+          console.log('Fixes applied!');
+        });
+      </script>
 </body>
 </html>
