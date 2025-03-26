@@ -16,6 +16,16 @@ window.showPopup = window.showPopup || function(options) {
   if (options && options.onConfirm) setTimeout(options.onConfirm, 100);
 };
 
+window.addEventListener('error', function(event) {
+  console.log('Detailed error information:', {
+    message: event.message,
+    filename: event.filename,
+    lineno: event.lineno,
+    colno: event.colno,
+    error: event.error
+  });
+});
+
 // Fix image loading errors
 document.addEventListener('error', function(e) {
   if (e.target.tagName.toLowerCase() === 'img') {
