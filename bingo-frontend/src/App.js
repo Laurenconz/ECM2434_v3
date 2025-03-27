@@ -23,7 +23,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 // Import Notification System
 import NotificationManager from './components/NotificationManager';
 import PopupManager from './components/PopupManager';
-import GameKeeper from './components/GameKeeper';
+import GameKeeperNew from './components/GameKeeperNew';
 
 const App = () => {
   return (
@@ -54,15 +54,15 @@ const App = () => {
         <Route path="/bingo" element={<BingoBoard />} />
         <Route path="/upload" element={<Upload />} />
         
-        <Route path="/gamekeeper" element={<GameKeeper />} />
+        <Route path="/gamekeeper" element={<GameKeeperNew />} />
         <Route path="/test-route" element={<div>Simple test route</div>} />
         
         {/* Alternative GameKeeper route with a different path */}
         <Route path="/gk" element={
-          <ErrorBoundary>
-            <GameKeeper />
-          </ErrorBoundary>
-        } />
+  <ErrorBoundary>
+    <GameKeeperNew />
+  </ErrorBoundary>
+} />
         
         <Route path="/scan" element={<Scan />} />
         <Route path="/overview" element={<Overview />} />
