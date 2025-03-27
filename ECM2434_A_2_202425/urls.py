@@ -4,11 +4,11 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponse
-import requests
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from PIL import Image
 import io
+import requests
 
 @csrf_exempt
 def placeholder_proxy(request, size):

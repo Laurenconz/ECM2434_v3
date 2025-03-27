@@ -1,13 +1,13 @@
-// components/GameKeeperNew.js
 import React from 'react';
 
-function GameKeeperNew() {
+// Super basic component
+const GameKeeperNew = () => {
   return (
-    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
-      <h1 style={{ color: '#5E318A' }}>GameKeeper Dashboard (New)</h1>
-      <p>This is a brand new component</p>
+    <div>
+      <h1>GameKeeper Dashboard</h1>
+      <p>Minimal test component</p>
     </div>
   );
-}
+};
 
 export default GameKeeperNew;
