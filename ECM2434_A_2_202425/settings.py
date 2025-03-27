@@ -62,7 +62,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # For development only - disable in production
-CORS_ALLOW_ALL_ORIGINS = DEBUG
+CORS_ALLOW_ALL_ORIGINS = False
 
 # Enable credentials if you're using cookies or session authentication
 CORS_ALLOW_CREDENTIALS = True
