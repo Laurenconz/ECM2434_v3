@@ -24,14 +24,6 @@ import ErrorBoundary from './components/ErrorBoundary';
 import NotificationManager from './components/NotificationManager';
 import PopupManager from './components/PopupManager';
 import GameKeeper from './components/GameKeeper';
-const GameKeeper = () => {
-  return (
-    <div>
-      <h1>GameKeeper Test</h1>
-      <p>Inline component definition</p>
-    </div>
-  );
-};
 
 const App = () => {
   return (
