@@ -57,7 +57,7 @@ if DEBUG:  # Only include Debug Toolbar Middleware when in debug mode
 
 # 5️⃣ CORS Settings (Allow Frontend to Access Backend)
 CORS_ALLOWED_ORIGINS = [
-    "https://ecm2434-v3-n16y.onrender.com",
+    "https://ecm2434-v3-z67m.onrender.com",
     "https://ecm2434-v3.onrender.com",
 ]
 
