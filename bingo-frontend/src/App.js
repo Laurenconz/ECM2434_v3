@@ -14,7 +14,15 @@ import Homeboard from './components/Homeboard';
 import BingoBoard from './components/BingoBoard';
 import Upload from './components/Upload';
 import Scan from './components/Scan';
-import GameKeeper from './components/GameKeeper';
+const GameKeeper = () => {
+  return (
+    <div>
+      <h1>GameKeeper Test</h1>
+      <p>Inline component definition</p>
+    </div>
+  );
+};
+
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Overview from './components/Overview';
 import BingoPatterns from './components/BingoPatterns';
@@ -53,11 +61,8 @@ const App = () => {
         <Route path="/bingo" element={<BingoBoard />} />
         <Route path="/upload" element={<Upload />} />
         
-        <Route path="/gamekeeper" element={
-  <ErrorBoundary>
-    <GameKeeper />
-  </ErrorBoundary>
-} />
+        <Route path="/gamekeeper" element={<GameKeeper />} />
+        <Route path="/test-route" element={<div>Simple test route</div>} />
         
         {/* Alternative GameKeeper route with a different path */}
         <Route path="/gk" element={
