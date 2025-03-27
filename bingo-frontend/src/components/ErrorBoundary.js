@@ -8,12 +8,10 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI
     return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
-    // Log the error to the console
     console.error("Error caught by boundary:", error, errorInfo);
     this.setState({
       error: error,
@@ -23,7 +21,6 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
       return (
         <div style={{ 
           padding: '20px', 
@@ -32,13 +29,14 @@ class ErrorBoundary extends React.Component {
           borderRadius: '4px',
           backgroundColor: '#ffebee'
         }}>
-          <h2>Something went wrong.</h2>
+          <h2>Something went wrong in the GameKeeper component.</h2>
           <details style={{ whiteSpace: 'pre-wrap', marginTop: '10px' }}>
             <summary>See error details</summary>
             {this.state.error && this.state.error.toString()}
             <br />
             {this.state.errorInfo && this.state.errorInfo.componentStack}
           </details>
+          <p>You can use the <a href="/gamekeeper.html" style={{color: '#5E318A'}}>static GameKeeper page</a> instead.</p>
           <button 
             onClick={() => window.location.reload()}
             style={{

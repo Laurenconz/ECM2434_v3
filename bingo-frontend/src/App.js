@@ -53,12 +53,11 @@ const App = () => {
         <Route path="/bingo" element={<BingoBoard />} />
         <Route path="/upload" element={<Upload />} />
         
-        {/* GameKeeper route wrapped in ErrorBoundary */}
         <Route path="/gamekeeper" element={
-          <ErrorBoundary>
-            <GameKeeper />
-          </ErrorBoundary>
-        } />
+  <ErrorBoundary>
+    <GameKeeper />
+  </ErrorBoundary>
+} />
         
         {/* Alternative GameKeeper route with a different path */}
         <Route path="/gk" element={
