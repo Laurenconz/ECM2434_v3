@@ -1,5 +1,4 @@
- // Main Application Routing
- 
+// App.js - Updated with Error Boundary
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -15,14 +14,18 @@ import Homeboard from './components/Homeboard';
 import BingoBoard from './components/BingoBoard';
 import Upload from './components/Upload';
 import Scan from './components/Scan';
-import GameKeeper from './components/GameKeeper';
+
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Overview from './components/Overview';
 import BingoPatterns from './components/BingoPatterns';
+import ErrorBoundary from './components/ErrorBoundary';
 
 // Import Notification System
 import NotificationManager from './components/NotificationManager';
 import PopupManager from './components/PopupManager';
+import GameKeeperNew from './components/GameKeeperNew';
+import GameKeeper from './components/GameKeeper';
+import MinimalGameKeeper from './components/MinimalGameKeeper';
 
 const App = () => {
   return (
@@ -46,15 +49,23 @@ const App = () => {
 
         {/* Leaderboard Routes */}
         <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/leaderboard?type=lifetime" element={<Leaderboard />} />
-        <Route path="/leaderboard?type=monthly" element={<Leaderboard />} />
-
+        
         {/* Other Game Features Routes */}
         <Route path="/homeboard" element={<Homeboard />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/bingo" element={<BingoBoard />} />
         <Route path="/upload" element={<Upload />} />
-        <Route path="/gamekeeper" element={<GameKeeper />} />
+        
+        <Route path="/test-route" element={<div>Simple test route</div>} />
+        <Route path="/gamekeeper-new" element={<GameKeeperNew />} />
+        {/* Alternative GameKeeper route with a different path */}
+        <Route path="/gamekeeper" element={
+          <ErrorBoundary>
+            <GameKeeper />
+          </ErrorBoundary>
+        } />
+        <Route path="/gk" element={<MinimalGameKeeper />} />
+        
         <Route path="/scan" element={<Scan />} />
         <Route path="/overview" element={<Overview />} />
         <Route path="/patterns" element={<BingoPatterns />} />

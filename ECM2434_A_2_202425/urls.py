@@ -4,11 +4,11 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponse
-import requests
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from PIL import Image
 import io
+import requests
 
 @csrf_exempt
 def placeholder_proxy(request, size):
@@ -47,8 +47,12 @@ def api_proxy(request, path):
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    # Add a specific route for developer-front.html BEFORE the catch-all
+    # Add a specific route for your template HTML files
     path('developer-front.html', TemplateView.as_view(template_name='developer-front.html')),
+    path('gamekeeper.html', TemplateView.as_view(template_name='gamekeeper.html')),
+    
+    # Add a direct route to the static gamekeeper page
+    path('gamekeeper-static/', TemplateView.as_view(template_name='gamekeeper.html')),
     
     # API routes
     path('api/', include('bingo.urls')),
@@ -59,8 +63,10 @@ urlpatterns = [
     
     # React app routes - catches everything else
     path('gamekeeper/', TemplateView.as_view(template_name='index.html')),
+    path('gk/', TemplateView.as_view(template_name='index.html')),
     path('', TemplateView.as_view(template_name='index.html')),
-    re_path(r'^(?!api/|admin/|developer-front\.html).*$', TemplateView.as_view(template_name='index.html')),
+    re_path(r'^(?!api/|admin/|developer-front\.html|gamekeeper\.html|gamekeeper-static/).*$', 
+            TemplateView.as_view(template_name='index.html')),
 ]
 
 # Add this for development (will be ignored in production with DEBUG=False)
