@@ -14,14 +14,6 @@ import Homeboard from './components/Homeboard';
 import BingoBoard from './components/BingoBoard';
 import Upload from './components/Upload';
 import Scan from './components/Scan';
-const GameKeeper = () => {
-  return (
-    <div>
-      <h1>GameKeeper Test</h1>
-      <p>Inline component definition</p>
-    </div>
-  );
-};
 
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Overview from './components/Overview';
@@ -31,6 +23,15 @@ import ErrorBoundary from './components/ErrorBoundary';
 // Import Notification System
 import NotificationManager from './components/NotificationManager';
 import PopupManager from './components/PopupManager';
+
+const GameKeeper = () => {
+  return (
+    <div>
+      <h1>GameKeeper Test</h1>
+      <p>Inline component definition</p>
+    </div>
+  );
+};
 
 const App = () => {
   return (
