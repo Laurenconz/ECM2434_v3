@@ -3,3 +3,22 @@
 > GENERATE_SOURCEMAP=false react-scripts build
 
 Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  193.18 kB  build/static/js/main.985e49bd.js
+  10.06 kB   build/static/css/main.577de2ab.css
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
