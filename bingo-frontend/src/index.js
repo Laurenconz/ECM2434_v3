@@ -34,11 +34,19 @@ document.addEventListener('error', function(e) {
   }
 }, true);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
-);
+const renderApp = () => {
+  try {
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+    console.log("App rendered successfully");
+  } catch (error) {
+    console.error("Failed to render app:", error);
+    document.getElementById('root').innerHTML = '<div style="padding: 20px;"><h1>Something went wrong</h1><p>' + error.message + '</p></div>';
+  }
+};
+
+renderApp();

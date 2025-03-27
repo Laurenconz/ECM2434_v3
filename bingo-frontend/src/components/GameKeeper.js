@@ -1,13 +1,13 @@
-// components/GameKeeper.js - Ultra-minimal version
+// components/GameKeeper.js
 import React from 'react';
 
-const GameKeeper = () => {
+function GameKeeper() {
   return (
     <div>
-      <h1>GameKeeper Test</h1>
-      <p>Minimal test component</p>
+      <h1>GameKeeper Dashboard</h1>
+      <p>Testing basic component rendering</p>
     </div>
   );
-};
+}
 
 export default GameKeeper;
