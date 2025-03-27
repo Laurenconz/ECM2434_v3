@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './UserProfile.css';
 
 // Fetch API URL from environment variables (fallback to localhost if not set)
-const API_URL = "";
+const API_URL = ''; 
 
 // Default profile picture path with the correct filename
 const DEFAULT_PROFILE_PIC = "/media/profile_pics/default.png";
