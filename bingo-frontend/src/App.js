@@ -24,6 +24,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import NotificationManager from './components/NotificationManager';
 import PopupManager from './components/PopupManager';
 import GameKeeperNew from './components/GameKeeperNew';
+import MinimalGameKeeper from './components/MinimalGameKeeper';
 
 const App = () => {
   return (
@@ -54,15 +55,11 @@ const App = () => {
         <Route path="/bingo" element={<BingoBoard />} />
         <Route path="/upload" element={<Upload />} />
         
-        <Route path="/gamekeeper" element={<GameKeeperNew />} />
         <Route path="/test-route" element={<div>Simple test route</div>} />
         
         {/* Alternative GameKeeper route with a different path */}
-        <Route path="/gk" element={
-  <ErrorBoundary>
-    <GameKeeperNew />
-  </ErrorBoundary>
-} />
+        <Route path="/gamekeeper" element={<MinimalGameKeeper />} />
+        <Route path="/gk" element={<MinimalGameKeeper />} />
         
         <Route path="/scan" element={<Scan />} />
         <Route path="/overview" element={<Overview />} />
