@@ -11,7 +11,8 @@ import PatternVisualizer from './PatternVisualizer';
 import EndOfMonthReminder from './EndOfMonthReminder';
 
 // Define the API URL (
-  const API_URL = "https://ecm2434-v3.onrender.com";
+  const API_URL = '/api';
+
 
 // For storing already shown pattern notifications across sessions/renders
 const getShownPatternNotifications = () => {

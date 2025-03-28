@@ -1,5 +1,6 @@
 // components/GameKeeper.js
 import React from 'react';
+const API_URL = '/api';
 
 function GameKeeper() {
   return (

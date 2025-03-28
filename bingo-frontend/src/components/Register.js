@@ -7,7 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Register.css';
 
 // Fetch API URL from environment variables (fallback to localhost if not set)
-const API_URL = "https://ecm2434-v3.onrender.com";
+const API_URL = '/api';
+
 
 const Register = () => {
   // State variables for form data, errors, and loading status

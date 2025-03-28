@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './Login.css'; // Reusing the login styles
 
 // Fetch API URL from environment variables (fallback to localhost if not set)
-const API_URL = "https://ecm2434-v3.onrender.com";
+const API_URL = '/api';
 
 const ResetPassword = () => {
   // Get token from URL params

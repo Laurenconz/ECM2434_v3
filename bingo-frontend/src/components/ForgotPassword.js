@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import { /*Link*/ useNavigate } from 'react-router-dom';
 import './Login.css'; 
 
-const API_URL = "https://ecm2434-v3.onrender.com";
+const API_URL = '/api';
+
 
 // For debugging
 console.log("Using API URL:", API_URL);
