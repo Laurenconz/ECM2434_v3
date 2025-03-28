@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Create an axios instance with the correct defaults
 const apiClient = axios.create({
-  baseURL: '',  // Empty string for relative URLs
+  baseURL: '/api',  // Empty string for relative URLs
   timeout: 15000,
 });
 
