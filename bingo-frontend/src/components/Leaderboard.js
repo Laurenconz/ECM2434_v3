@@ -19,7 +19,7 @@ const Leaderboard = () => {
     useEffect(() => {
         setLoading(true);
         
-        axios.get(`${API_URL}/api/leaderboard/`)
+        axios.get(`${API_URL}/leaderboard/`)
             .then((response) => {
                 console.log(" API Raw Response:", response.data);
 

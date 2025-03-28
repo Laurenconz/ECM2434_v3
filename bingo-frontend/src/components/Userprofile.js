@@ -27,7 +27,7 @@ const Profile = () => {
   // Fetch user profile data
   const fetchUserData = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/profile/`, {
+      const response = await axios.get(`${API_URL}/profile/`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
       });
       console.log('User profile data:', response.data);
@@ -48,7 +48,7 @@ const Profile = () => {
     // Fetch tasks for display in the list
     const fetchCompletedTasks = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/tasks/`, {
+        const response = await axios.get(`${API_URL}/tasks/`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
         });
     
@@ -110,7 +110,7 @@ const Profile = () => {
     });
 
     try {
-      const response = await axios.put(`${API_URL}/api/profile/update/`, formData, {
+      const response = await axios.put(`${API_URL}/profile/update/`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           'Content-Type': 'multipart/form-data',
@@ -160,8 +160,8 @@ const Profile = () => {
       
       // Option 1: Try standard DELETE method first
       try {
-        console.log('Attempting DELETE to /api/profile/');
-        const response = await axios.delete(`${API_URL}/api/profile/`, {
+        console.log('Attempting DELETE to /profile/');
+        const response = await axios.delete(`${API_URL}/profile/`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
@@ -182,7 +182,7 @@ const Profile = () => {
       // This is a common pattern when DELETE endpoints aren't implemented
       console.log('Attempting PUT to /api/profile/update/ with delete flag');
       const updateResponse = await axios.put(
-        `${API_URL}/api/profile/update/`,
+        `${API_URL}/profile/update/`,
         { is_deleted: true, delete_account: true },
         {
           headers: {
