@@ -33,41 +33,94 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     
-    <!-- Additional fixes after DOM loads -->
+    <!-- Comprehensive fix script -->
     <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            console.log('Applying additional fixes...');
+        // Comprehensive fetch override
+        const originalFetch = window.fetch;
+        window.fetch = function(url, options) {
+            console.log('Fetch called with URL:', url);
             
-            // Fix localhost URL references in fetch calls
-            const originalFetch = window.fetch;
-            window.fetch = function(url, options) {
-                if (typeof url === 'string' && url.includes('localhost:8000')) {
+            // Fix any hardcoded URLs
+            if (typeof url === 'string') {
+                if (url.includes('localhost:8000')) {
                     url = url.replace('localhost:8000', '');
-                    console.log('Fixed URL:', url);
+                    console.log('Fixed localhost URL to:', url);
                 }
-                return originalFetch(url, options);
+                if (url.includes('https://ecm2434-v3.onrender.com')) {
+                    url = url.replace('https://ecm2434-v3.onrender.com', '');
+                    console.log('Fixed render URL from', url);
+                }
+            }
+            
+            console.log('Final URL being fetched:', url);
+            return originalFetch(url, options);
+        };
+        
+        // Patch XMLHttpRequest (used by Axios)
+        const originalOpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+            console.log('XHR open called with URL:', url);
+            
+            // Fix any hardcoded URLs
+            let newUrl = url;
+            if (typeof url === 'string') {
+                if (url.includes('localhost:8000')) {
+                    newUrl = url.replace('localhost:8000', '');
+                    console.log('Fixed localhost XHR URL to:', newUrl);
+                }
+                if (url.includes('https://ecm2434-v3.onrender.com')) {
+                    newUrl = url.replace('https://ecm2434-v3.onrender.com', '');
+                    console.log('Fixed render XHR URL to:', newUrl);
+                }
+            }
+            
+            console.log('Final XHR URL being requested:', newUrl);
+            return originalOpen.call(this, method, newUrl, async, user, password);
+        };
+
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - setting up testing tools...');
+            
+            // Create a test function for direct API access
+            window.testAPI = function() {
+                console.log('Fetching leaderboard with fetch...');
+                fetch('/api/leaderboard/')
+                    .then(r => r.text())
+                    .then(text => {
+                        console.log('Raw response:', text);
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            console.error('Failed to parse JSON:', e);
+                            console.log('Text was:', text);
+                            throw e;
+                        }
+                    })
+                    .then(data => {
+                        console.log('Leaderboard data:', data);
+                        alert('API test successful!');
+                    })
+                    .catch(err => {
+                        console.error('API test failed:', err);
+                        alert('API test failed: ' + err.message);
+                    });
             };
             
-            // Fix axios if it exists
-            if (window.axios) {
-                const originalGet = window.axios.get;
-                window.axios.get = function(url, config) {
-                    if (url.includes('localhost:8000')) {
-                        url = url.replace('localhost:8000', '');
-                        console.log('Fixed axios URL:', url);
-                    }
-                    return originalGet(url, config);
-                };
-                
-                const originalPost = window.axios.post;
-                window.axios.post = function(url, data, config) {
-                    if (url.includes('localhost:8000')) {
-                        url = url.replace('localhost:8000', '');
-                        console.log('Fixed axios POST URL:', url);
-                    }
-                    return originalPost(url, data, config);
-                };
-            }
+            // Create a test button
+            const btn = document.createElement('button');
+            btn.textContent = 'Test API';
+            btn.style.position = 'fixed';
+            btn.style.top = '10px';
+            btn.style.right = '10px';
+            btn.style.zIndex = '9999';
+            btn.style.padding = '8px 12px';
+            btn.style.backgroundColor = '#4CAF50';
+            btn.style.color = 'white';
+            btn.style.border = 'none';
+            btn.style.borderRadius = '4px';
+            btn.style.cursor = 'pointer';
+            btn.onclick = window.testAPI;
+            document.body.appendChild(btn);
             
             // Fix image loading errors
             document.addEventListener('error', function(e) {
@@ -78,74 +131,14 @@
                 }
             }, true);
             
-            console.log('All fixes applied!');
+            // Auto-test the API after a short delay
+            setTimeout(function() {
+                console.log("Auto-testing API...");
+                window.testAPI();
+            }, 2000);
+            
+            console.log('All fixes and testing tools applied!');
         });
     </script>
-<script>
-  // Override fetch to fix URLs
-  const originalFetch = window.fetch;
-  window.fetch = function(url, options) {
-    console.log('Fetch called with URL:', url);
-    
-    // Fix any hardcoded URLs
-    if (typeof url === 'string') {
-      if (url.includes('https://ecm2434-v3.onrender.com')) {
-        const newUrl = url.replace('https://ecm2434-v3.onrender.com', '');
-        console.log('Fixed URL from', url, 'to', newUrl);
-        url = newUrl;
-      }
-    }
-    
-    return originalFetch(url, options);
-  };
-  
-  // Also patch XMLHttpRequest (used by Axios)
-  const originalOpen = XMLHttpRequest.prototype.open;
-  XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
-    console.log('XHR open called with URL:', url);
-    
-    // Fix any hardcoded URLs
-    let newUrl = url;
-    if (typeof url === 'string' && url.includes('https://ecm2434-v3.onrender.com')) {
-      newUrl = url.replace('https://ecm2434-v3.onrender.com', '');
-      console.log('Fixed XHR URL from', url, 'to', newUrl);
-    }
-    
-    return originalOpen.call(this, method, newUrl, async, user, password);
-  };
-</script>
-<script>
-    // Override fetch to fix URLs
-    const originalFetch = window.fetch;
-    window.fetch = function(url, options) {
-      console.log('Fetch called with URL:', url);
-      
-      // Fix any hardcoded URLs
-      if (typeof url === 'string') {
-        if (url.includes('https://ecm2434-v3.onrender.com')) {
-          const newUrl = url.replace('https://ecm2434-v3.onrender.com', '');
-          console.log('Fixed URL from', url, 'to', newUrl);
-          url = newUrl;
-        }
-      }
-      
-      return originalFetch(url, options);
-    };
-    
-    // Also patch XMLHttpRequest (used by Axios)
-    const originalOpen = XMLHttpRequest.prototype.open;
-    XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
-      console.log('XHR open called with URL:', url);
-      
-      // Fix any hardcoded URLs
-      let newUrl = url;
-      if (typeof url === 'string' && url.includes('https://ecm2434-v3.onrender.com')) {
-        newUrl = url.replace('https://ecm2434-v3.onrender.com', '');
-        console.log('Fixed XHR URL from', url, 'to', newUrl);
-      }
-      
-      return originalOpen.call(this, method, newUrl, async, user, password);
-    };
-  </script>
 </body>
 </html>
