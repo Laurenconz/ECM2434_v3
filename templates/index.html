@@ -81,5 +81,44 @@
             console.log('All fixes applied!');
         });
     </script>
+    <script>
+        // Debug API calls - run this manually after page loads
+        document.addEventListener('DOMContentLoaded', function() {
+          console.log('Testing direct API access...');
+          window.testAPI = function() {
+            console.log('Fetching leaderboard with fetch...');
+            fetch('/api/leaderboard/')
+              .then(r => r.text())
+              .then(text => {
+                console.log('Raw response:', text);
+                try {
+                  return JSON.parse(text);
+                } catch (e) {
+                  console.error('Failed to parse JSON:', e);
+                  console.log('Text was:', text);
+                  throw e;
+                }
+              })
+              .then(data => {
+                console.log('Leaderboard data:', data);
+                alert('API test successful!');
+              })
+              .catch(err => {
+                console.error('API test failed:', err);
+                alert('API test failed: ' + err.message);
+              });
+          };
+          
+          // Create a test button
+          const btn = document.createElement('button');
+          btn.textContent = 'Test API';
+          btn.style.position = 'fixed';
+          btn.style.top = '10px';
+          btn.style.right = '10px';
+          btn.style.zIndex = '9999';
+          btn.onclick = window.testAPI;
+          document.body.appendChild(btn);
+        });
+      </script>
 </body>
 </html>
