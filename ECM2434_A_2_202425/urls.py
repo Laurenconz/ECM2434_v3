@@ -59,7 +59,7 @@ urlpatterns = [
     
     # Proxy routes
     path('via.placeholder.com/<str:size>', placeholder_proxy),
-    path('localhost:8000/api/<path:path>', api_proxy),
+    re_path(r'^localhost:8000/api/(?P<path>.*)$', api_proxy),
     
     # React app routes - catches everything else
     path('gamekeeper/', TemplateView.as_view(template_name='index.html')),

@@ -126,7 +126,7 @@ const Upload = () => {
       }
 
       // Make the API request
-      const response = await fetch('http://localhost:8000/api/complete_task/', {
+      const response = await fetch('https://ecm2434-v3.onrender.com/api/complete_task/', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

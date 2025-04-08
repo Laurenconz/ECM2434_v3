@@ -14,15 +14,12 @@ class RequestFixerMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        # Convert localhost API requests to relative paths
+        # Fix incorrect API base (e.g., /localhost:8000/api/...)
         if request.path.startswith('/localhost:8000/api/'):
-            # Strip off the localhost part
-            corrected_path = request.path.replace('/localhost:8000/api/', '/api/')
-            request.path = corrected_path
-            request.path_info = corrected_path
-        
-        # Handle any other path fixups here as needed
-        
-        # Continue processing the request
+            corrected_path = request.path.replace('/localhost:8000', '')
+            request.META['PATH_INFO'] = corrected_path
+            print(f"[Middleware] Corrected path: {corrected_path}")
+
+        # Continue processing
         response = self.get_response(request)
         return response

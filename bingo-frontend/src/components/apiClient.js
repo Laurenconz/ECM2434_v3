@@ -1,19 +1,18 @@
 // apiClient.js
 import axios from 'axios';
 
-// Create a configured axios instance
+// ✅ Set your deployed backend base URL
 const apiClient = axios.create({
-  baseURL: '',  // Use a relative URL
+  baseURL: 'https://ecm2434-v3.onrender.com',
   timeout: 15000,
 });
 
-// Add request interceptor to fix any remaining localhost:8000 URLs
+// ✅ Intercept requests to fix any localhost references
 apiClient.interceptors.request.use(
   config => {
-    // Fix URLs that still use localhost
     if (config.url && config.url.includes('localhost:8000')) {
-      config.url = config.url.replace('localhost:8000', '');
-      console.log('Fixed URL in interceptor:', config.url);
+      config.url = config.url.replace('localhost:8000', 'https://ecm2434-v3.onrender.com');
+      console.log('Rewriting localhost URL to:', config.url);
     }
     return config;
   },

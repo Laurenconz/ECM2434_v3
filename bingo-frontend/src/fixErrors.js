@@ -26,7 +26,7 @@ window.e = function() {
     const originalAxiosGet = window.axios.get;
     window.axios.get = function(url, config) {
       if (typeof url === 'string' && url.includes('localhost:8000')) {
-        url = '/api' + url.split('/api')[1];
+        url = url.replace('localhost:8000', 'https://ecm2434-v3.onrender.com');
         console.log('Fixed axios URL to:', url);
       }
       return originalAxiosGet(url, config);
@@ -35,7 +35,7 @@ window.e = function() {
     const originalAxiosPost = window.axios.post;
     window.axios.post = function(url, data, config) {
       if (typeof url === 'string' && url.includes('localhost:8000')) {
-        url = '/api' + url.split('/api')[1];
+        url = url.replace('localhost:8000', 'https://ecm2434-v3.onrender.com');
         console.log('Fixed axios POST URL to:', url);
       }
       return originalAxiosPost(url, data, config);
@@ -46,10 +46,11 @@ window.e = function() {
   const originalFetch = window.fetch;
   window.fetch = function(url, options) {
     if (typeof url === 'string' && url.includes('localhost:8000')) {
-      url = url.replace('localhost:8000', '');
+      url = url.replace('localhost:8000', 'https://ecm2434-v3.onrender.com');
       console.log('Fixed fetch URL:', url);
     }
     return originalFetch(url, options);
   };
+  
   
   console.log('Error fixes loaded successfully');
