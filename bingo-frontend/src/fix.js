@@ -16,8 +16,8 @@ window.n = function() {
 if (window.axios) {
   const originalGet = window.axios.get;
   window.axios.get = function(url, config) {
-    if (url.includes('localhost:8000')) {
-      url = url.replace('localhost:8000', 'https://ecm2434-v3.onrender.com');
+    if (url.includes('https://ecm2434-v3.onrender.com/api')) {
+      url = url.replace('https://ecm2434-v3.onrender.com/api', 'https://ecm2434-v3.onrender.com');
       console.log('Fixed axios URL:', url);
     }
     return originalGet(url, config);
@@ -25,8 +25,8 @@ if (window.axios) {
   
   const originalPost = window.axios.post;
   window.axios.post = function(url, data, config) {
-    if (url.includes('localhost:8000')) {
-      url = url.replace('localhost:8000', 'https://ecm2434-v3.onrender.com');
+    if (url.includes('https://ecm2434-v3.onrender.com/api')) {
+      url = url.replace('https://ecm2434-v3.onrender.com/api', 'https://ecm2434-v3.onrender.com');
       console.log('Fixed axios POST URL:', url);
     }
     return originalPost(url, data, config);
