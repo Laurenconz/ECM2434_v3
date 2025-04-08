@@ -261,7 +261,7 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
         console.log('Auth check:', authResponse.data);
 
         // Get all user tasks to check status (pending or completed)
-        return apiClient.get(`${API_URL}/api/profile/`, { headers });
+        return apiClient.get('/profile/', { headers });
       })
       .then(profileResponse => {
         // Extract user tasks from profile if available
@@ -566,7 +566,7 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
         // Fetch fresh data from the server to ensure everything is in sync
         const token = localStorage.getItem('accessToken');
         const headers = { Authorization: `Bearer ${token}` };
-        const profileResponse = await apiClient.post(`${API_URL}/api/profile/`, { headers });
+        const profileResponse = await apiClient.get('/profile/', { headers });
 
         if (profileResponse.data && profileResponse.data.user_tasks) {
           setUserTasks(profileResponse.data.user_tasks);
