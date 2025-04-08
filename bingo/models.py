@@ -101,7 +101,7 @@ class Profile(models.Model):
     )  # Links the profile to a user
 
     profile_picture = models.ImageField(
-        upload_to='profile_pics/',
+        upload_to='static/media/profile_pics/',
         null=True,
         blank=True
     )  # Allows users to upload a profile picture

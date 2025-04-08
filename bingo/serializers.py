@@ -99,12 +99,12 @@ class ProfileSerializer(serializers.ModelSerializer):
     email = serializers.CharField(source='user.email')
     total_points = serializers.SerializerMethodField()
     completed_tasks = serializers.SerializerMethodField()
-    profile_picture_url = serializers.SerializerMethodField()
+    profile_picture = serializers.SerializerMethodField()
 
     class Meta:
         model = Profile
-        fields = ['username', 'email', 'profile_picture_url',
-                  'rank', 'total_points', 'completed_tasks']
+        fields = ['username', 'email', 'profile_picture', 'rank', 'total_points', 'completed_tasks']
+
 
     def get_total_points(self, obj):
         leaderboard, _ = Leaderboard.objects.get_or_create(user=obj.user)
@@ -113,11 +113,12 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_completed_tasks(self, obj):
         return UserTask.objects.filter(user=obj.user, completed=True).count()
 
-    def get_profile_picture_url(self, obj):
-        request = self.context.get('request')
+    profile_picture = serializers.SerializerMethodField()
+
+    def get_profile_picture(self, obj):
         if obj.profile_picture:
-            return request.build_absolute_uri(f"/static/{obj.profile_picture.name}")
-        return None
+            return f"/{obj.profile_picture}"
+        return "/static/media/profile_pics/default.png" 
 
 
 UserProfileSerializer = ProfileSerializer

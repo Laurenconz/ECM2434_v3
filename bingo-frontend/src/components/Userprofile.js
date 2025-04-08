@@ -221,40 +221,43 @@ const Profile = () => {
 
   
 
-  // Helper function to get proper image URL
   const getProfileImageUrl = () => {
     if (editMode && imagePreview) {
       return imagePreview;
     }
-    
-    // First check if userData has a profile picture
+  
+    // Check if the profile picture is provided in userData
     if (userData?.profile_picture) {
       let picturePath = userData.profile_picture;
-      
-      // If the path doesn't start with 'http' or '/', add a leading slash
-      if (!picturePath.startsWith('http') && !picturePath.startsWith('/')) {
-        picturePath = `/${picturePath}`;
+  
+      // Force it to use /static/ instead of /media/
+      if (picturePath.startsWith('media/')) {
+        picturePath = picturePath.replace('media/', 'static/');
+      } else if (!picturePath.startsWith('http') && !picturePath.startsWith('/')) {
+        picturePath = `static/${picturePath}`;
       }
-      
-      // Check if the path is a relative path that needs the API_URL
-      if (!picturePath.startsWith('http')) {
-        return `${API_URL}${picturePath}`;
-      }
-      
-      return picturePath;
+  
+      return `${API_URL}/${picturePath}`;
     }
-    
+  
+    // Fallback to saved picture in localStorage
     const savedPicture = localStorage.getItem('profilePicture');
     if (savedPicture) {
-      if (!savedPicture.startsWith('http') && !savedPicture.startsWith('/')) {
-        return `${API_URL}/${savedPicture}`;
+      let picturePath = savedPicture;
+  
+      if (picturePath.startsWith('media/')) {
+        picturePath = picturePath.replace('media/', 'static/');
+      } else if (!picturePath.startsWith('http') && !picturePath.startsWith('/')) {
+        picturePath = `static/${picturePath}`;
       }
-      return savedPicture.startsWith('http') ? savedPicture : `${API_URL}${savedPicture}`;
+  
+      return `${API_URL}/${picturePath}`;
     }
-    
-    // Use our custom default picture instead of placeholder
-    return `${API_URL}${DEFAULT_PROFILE_PIC}`;
+  
+    // Final fallback to default profile pic
+    return `${API_URL}/static/profile_pics/default.png`;
   };
+  
 
 
   const getBadgeEmoji = (badgeType) => {

@@ -4,8 +4,9 @@ set -e  # Exit on any error
 
 # Create necessary directories
 mkdir -p templates static/js static/css
+mkdir -p static/media/profile_pics  # For profile images
 
-# Write the correct index.html
+# ✅ Write the correct index.html
 cat <<EOF > templates/index.html
 <!doctype html>
 <html lang="en">
@@ -28,13 +29,17 @@ cat <<EOF > templates/index.html
 </html>
 EOF
 
-# Install backend dependencies
+# ✅ Install backend dependencies
 pip install -r requirements.txt
 
-# Static files and migrations
-python manage.py collectstatic --noinput
+# ✅ Run DB migrations
 python manage.py migrate
 python manage.py load_bingo_tasks
 
-# TEMP WORKAROUND: Serve media files from static
-cp -r media/* static/
+# ✅ Copy media files (especially profile images) into static before collectstatic
+if [ -d "media/profile_pics" ]; then
+  cp -r media/profile_pics/* static/media/profile_pics/ 2>/dev/null || true
+fi
+
+# ✅ Collect all static files
+python manage.py collectstatic --noinput
