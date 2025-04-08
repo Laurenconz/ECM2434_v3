@@ -1,3 +1,5 @@
+from . import views
+
 from .views import (
     register_user, login_user, check_auth, tasks,
     pending_tasks, complete_task, approve_task,
