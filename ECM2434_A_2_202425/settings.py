@@ -1,6 +1,9 @@
 import os
 from pathlib import Path
 import dj_database_url
+from dotenv import load_dotenv
+load_dotenv()
+
 
 
 # 1️⃣ Base Directory
@@ -94,11 +97,12 @@ CORS_ALLOW_HEADERS = [
 #  Django REST Framework Config
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
+        default='postgresql://laurenchao@localhost:5432/bingo-postgres-sql',
         conn_max_age=600,
-        ssl_require=False,  
+        ssl_require=False  # Important for local dev
     )
 }
+
 
 #  Password Validation
 AUTH_PASSWORD_VALIDATORS = [
