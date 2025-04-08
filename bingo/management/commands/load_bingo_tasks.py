@@ -2,6 +2,8 @@ from django.core.management.base import BaseCommand
 from bingo.models import Task
 import json, os
 from django.conf import settings
+print("Using DB engine:", settings.DATABASES['default']['ENGINE'])
+
 
 class Command(BaseCommand):
     help = 'Load bingo tasks from initial_data.json'

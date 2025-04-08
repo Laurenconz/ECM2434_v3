@@ -194,8 +194,6 @@ REST_FRAMEWORK = {
 }
 
 ROOT_URLCONF = 'ECM2434_A_2_202425.urls'
-print(f"Database location: {os.path.join(BASE_DIR, 'db.sqlite3')}")
-print(f"Does database file exist: {os.path.exists(os.path.join(BASE_DIR, 'db.sqlite3'))}")
 
 AUTHENTICATION_BACKENDS = [
     'bingo.backends.SpecialUserBackend',  # Change 'bingo' to your app name
