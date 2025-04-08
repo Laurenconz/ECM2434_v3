@@ -14,8 +14,9 @@ class RequestFixerMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        # Fix incorrect API base (e.g., /localhost:8000/api/...)
-        if request.path.startswith('/localhost:8000/api/'):
+        # Fix incorrect API base)
+        if '/localhost:8000/api/' in request.path:
+
             corrected_path = request.path.replace('/localhost:8000', '')
             request.META['PATH_INFO'] = corrected_path
             print(f"[Middleware] Corrected path: {corrected_path}")
