@@ -91,12 +91,11 @@ CORS_ALLOW_HEADERS = [
 ]
 
 #  Django REST Framework Config
-
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600,  # keep the connection alive
-        ssl_require=True   # for secure connections on Render
+        default=os.getenv('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
     )
 }
 
