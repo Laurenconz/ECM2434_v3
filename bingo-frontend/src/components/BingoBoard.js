@@ -10,9 +10,6 @@ import AchievementPopup from './AchievementPopup';
 import PatternVisualizer from './PatternVisualizer';
 import EndOfMonthReminder from './EndOfMonthReminder';
 
-// Define the API URL (
-  const API_URL = "https://ecm2434-v3.onrender.com";
-
 // For storing already shown pattern notifications across sessions/renders
 const getShownPatternNotifications = () => {
   try {
@@ -249,13 +246,14 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
     };
 
     // Fetch all tasks
-    apiClient.get('/api/tasks/')
+    apiClient.get('/tasks/')
+
       .then(response => {
         console.log('Tasks fetched:', response.data);
         setTasks(response.data);
 
         // After tasks are fetched, get user's task status
-        return apiClient.get(`${API_URL}/api/check-auth/`, { headers });
+        return apiClient.get('/check-auth/', { headers });
       })
       .then(authResponse => {
         console.log('Auth check:', authResponse.data);
@@ -400,7 +398,7 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
               try {
                 const token = localStorage.getItem('accessToken');
                 const response = await apiClient.post(
-                  `${API_URL}/api/complete_task/`,
+                  '/complete_task/',
                   { task_id: task.id },
                   { headers: { Authorization: `Bearer ${token}` } }
                 );
@@ -447,7 +445,7 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
           // Fallback if popup manager isn't available
           const token = localStorage.getItem('accessToken');
           const response = await apiClient.post(
-            `${API_URL}/api/complete_task/`,
+            '/complete_task/',
             { task_id: task.id },
             { headers: { Authorization: `Bearer ${token}` } }
           );
@@ -531,7 +529,7 @@ const checkForCompletedPatterns = useCallback((userTasksData) => {
 
       // Submit the task with resubmission flag
       const response = await apiClient.post(
-        `${API_URL}/api/complete_task/`,
+        `/complete_task/`,
         {
           task_id: taskId,
           is_resubmission: true
