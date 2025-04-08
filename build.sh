@@ -2,10 +2,14 @@
 
 set -e  # Exit on any error
 
-# Create directories
+# Create target dirs
 mkdir -p templates static/js static/css
 
-# Write index.html
+# Capture hashed filenames from React build
+JS_FILE=$(ls build/static/js/main.*.js | xargs -n 1 basename)
+CSS_FILE=$(ls build/static/css/main.*.css | xargs -n 1 basename)
+
+# Write index.html dynamically with real filenames
 cat <<EOF > templates/index.html
 <!doctype html>
 <html lang="en">
@@ -18,8 +22,8 @@ cat <<EOF > templates/index.html
     <link rel="apple-touch-icon" href="/static/sustainability bingo logo.jpeg"/>
     <link rel="manifest" href="/static/manifest.json"/>
     <title>Sustainability Bingo</title>
-    <script defer="defer" src="/static/js/main.b2233ee6.js"></script>
-    <link href="/static/css/main.ebfb8bca.css" rel="stylesheet">
+    <script defer="defer" src="/static/js/$JS_FILE"></script>
+    <link href="/static/css/$CSS_FILE" rel="stylesheet">
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -28,10 +32,8 @@ cat <<EOF > templates/index.html
 </html>
 EOF
 
-# Install dependencies
+# Install dependencies and setup
 pip install -r requirements.txt
-
-# Static files and database setup
 python manage.py collectstatic --noinput
 python manage.py migrate
 python manage.py load_bingo_tasks
