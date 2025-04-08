@@ -34,4 +34,4 @@ pip install -r requirements.txt
 # Static files and database setup
 python manage.py collectstatic --noinput
 python manage.py migrate
-python manage.py load_initial_tasks
+python manage.py load_bingo_tasks
