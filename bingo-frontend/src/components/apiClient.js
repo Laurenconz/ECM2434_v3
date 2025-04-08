@@ -1,24 +1,19 @@
-// apiClient.js
+// bingo-frontend/src/apiClient.js
+
 import axios from 'axios';
 
-// ✅ Set your deployed backend base URL
 const apiClient = axios.create({
-  baseURL: 'https://ecm2434-v3.onrender.com',
+  baseURL: 'https://ecm2434-v3.onrender.com/api', // ✅ use your deployed backend
   timeout: 15000,
 });
 
-// ✅ Intercept requests to fix any localhost references
-apiClient.interceptors.request.use(
-  config => {
-    if (config.url && config.url.includes('localhost:8000')) {
-      config.url = config.url.replace('localhost:8000', 'https://ecm2434-v3.onrender.com');
-      console.log('Rewriting localhost URL to:', config.url);
-    }
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
+// Optional interceptor for adding token
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('accessToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-);
+  return config;
+});
 
 export default apiClient;
