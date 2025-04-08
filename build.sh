@@ -35,3 +35,6 @@ pip install -r requirements.txt
 python manage.py collectstatic --noinput
 python manage.py migrate
 python manage.py load_bingo_tasks
+
+# TEMP WORKAROUND: Serve media files from static
+cp -r media/* static/
