@@ -53,7 +53,7 @@ DEBUG_PATTERN_CHECKING = False
 """
 # Task Loading Function
 def load_initial_tasks():
-    """Loads initial tasks from JSON file if the database is empty."""
+    Loads initial tasks from JSON file if the database is empty.
     if not Task.objects.exists():
         try:
             json_file_path = os.path.join(os.path.dirname(__file__), 'initial_data.json')
