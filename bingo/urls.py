@@ -1,4 +1,6 @@
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 from .views import (
     register_user, login_user, check_auth, tasks,
@@ -17,7 +19,7 @@ urlpatterns = [
     path('register/', register_user, name='register_user'),
     path('login/', login_user, name='login_user'),
     path('check-auth/', check_auth, name='check_auth'),
-    path('tasks/', tasks, name='tasks'),
+    path('tasks/', tasks, name='tasks')
     path('pending-tasks/', pending_tasks,name = 'pending-tasks'),
     path('complete_task/', complete_task, name='complete_task'),
     path('approve-task/', approve_task, name='approve_task'),
@@ -34,3 +36,5 @@ urlpatterns = [
     path('password-reset/confirm/', password_reset_confirm, name='password_reset_confirm'),
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -50,7 +50,7 @@ User = get_user_model()
 
 DEBUG_PATTERN_CHECKING = False
 
-"""
+
 # Task Loading Function
 def load_initial_tasks():
     Loads initial tasks from JSON file if the database is empty.
@@ -64,7 +64,7 @@ def load_initial_tasks():
             logger.info("Initial tasks loaded successfully.")
         except Exception as e:
             logger.error(f"Failed to load initial tasks: {e}") 
-"""
+
 
 # User Profile Update
 
